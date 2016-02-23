@@ -4,9 +4,12 @@ from gezzet.items import RwItem
 class RwSpider(scrapy.Spider):
     name = "rw_spider"
     allowed_domains = [ "http://www.primature.gov.rw/" ]
-    start_urls = ["http://www.primature.gov.rw/index.php?id=8",
-                  "http://www.primature.gov.rw/index.php?id=8&tx-filelist-pi1-36[path]=Official%20Gazettes&cHash=cc3451c98736783ac5d3751637a3a179"
-                ]
+    start_urls = ["http://www.primature.gov.rw/index.php?id=8&tx-filelist-pi1-36[path]=Official%20Gazettes&cHash=cc3451c98736783ac5d3751637a3a179"]
+    
+    def parse(self, response):
+            for href in response.css(".tx-filelist-pi1-filename a"):
+                url = response.urljoin(href.extract())
+                yield scrapy.Request(url, callback=self.parse_dir_contents)
 
     def parse(self, response):
         for sel in response.xpath('//*[(@id = "c36")]//a'):
