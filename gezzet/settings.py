@@ -30,7 +30,7 @@ NEWSPIDER_MODULE = 'gezzet.spiders'
 #CONCURRENT_REQUESTS_PER_IP=16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED=False
+COOKIES_ENABLED=True
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED=False
@@ -63,6 +63,7 @@ NEWSPIDER_MODULE = 'gezzet.spiders'
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'gezzet.pipelines.GezzetPipeline': 300,
+   # 'gezzet.pipelines.DuplicatesPipeline':300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -83,3 +84,11 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR='httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES=[]
 #HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# #data formats
+# FEED_URI = s3
+# FEED_FORMAT = 'jsonlines'
+# FEED_STORAGES =
+# FEED_EXPORTERS =
+# FEED_STORE_EMPTY =
+# FEED_EXPORT_FIELDS = ["filename", "link", "desc"]
